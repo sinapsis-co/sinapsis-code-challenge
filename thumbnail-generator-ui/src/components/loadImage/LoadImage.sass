@@ -1,0 +1,58 @@
+.loadimage
+  text-align: center
+
+.loadimage__drag
+  width: 70%
+  height: 45vh
+  margin: 0 auto
+  margin-top: 50px
+  border: 5px dashed white
+  transition: 0.5s
+  display: flex
+  align-items: center
+  justify-content: center
+  box-shadow: 1px -1px 10px 1px black
+    
+  &:hover
+    border: 5px dashed white
+    transition: 0.5s
+    cursor: pointer
+    background: blue
+    opacity: 0.5
+
+  &__text-active, &__text-noactive
+    color: white
+
+.loadimage__preview
+  width: 100%
+  margin-top: 10px
+  opacity: 0.9
+
+  &__image
+    width: 300px
+    height: 200px
+    z-index: 100
+    margin: 5px
+    border: 2px solid white
+
+  &__image:hover
+    cursor: pointer
+    opacity: 0.1
+
+  &__text
+    color: white  
+    font-size: 15px
+
+      
+@media screen and ( max-width: 425px )
+  .loadimage__drag
+    margin-top: 15px
+    padding: 5px
+
+    &__text-noactive
+      font-size: 18px
+
+  .preview__image
+    width: 300px
+    height: 150px
+  
