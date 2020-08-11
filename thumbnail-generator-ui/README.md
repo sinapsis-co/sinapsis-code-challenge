@@ -27,4 +27,5 @@ Once the dependencies are installed, we can run `npm run start or npm start` in 
 
 - REACT_APP_DOMAIN
 - REACT_APP_CLIENTID
+- PORT
 - REACT_APP_URL_API (coming soon)
