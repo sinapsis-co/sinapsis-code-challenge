@@ -34,6 +34,13 @@ function LoadImage() {
     });
   };
 
+  //Delete all image
+  const deleteAllImageHandler = () => {
+    const seccionImage = document.getElementById('preview_images');
+    setValueImageLoad([]);
+    return seccionImage.remove();
+  };
+
   //Load user in redux
   if (user) {
     dispatch(userData(user));
@@ -52,15 +59,16 @@ function LoadImage() {
             <h2 className="loadimage__drag__text-noactive"> 
             ¡Drag some image here, or click here for select file!</h2>}
         </div>
+          <h4 className="loadimage__preview__text">Quantity images loads:  
+          { valueImageLoad.length}</h4>
         <div
+          id="preview"
           className="loadimage__preview"
           onClick={(event) => deleteImageHandler(event)}
-          id="preview">
-          <h4 className="loadimage__preview__text">Quantity images loads: 
-          {valueImageLoad.length}</h4>
+          >
         </div>
         <>
-          <SendImage valueImageLoad={valueImageLoad} />
+          <SendImage valueImageLoad={valueImageLoad} deleteAllImageHandler={deleteAllImageHandler}/>
         </>
       </div>
     )

@@ -9,11 +9,15 @@ function previewImage(event) {
     reader.onload = function () {
       file.id = uuid();
       let preview = document.getElementById("preview");
+      let div = document.createElement("div");
       let image = document.createElement("img");
       image.src = reader.result;
       image.className = "loadimage__preview__image";
       image.id = file.id;
-      preview.append(image);
+      div.id = "preview_images";
+      div.className = "preview_images";
+      preview.append(div);
+      div.append(image);
     };
     return file;
   } else {
@@ -21,6 +25,20 @@ function previewImage(event) {
   }
 }
 
+function estructureObject(images) {
+  const imageData = images.map((image) => {
+    return (estructureObject = {
+      name: image.name,
+      size: image.size,
+      type: image.type,
+      path: image.path,
+      id: image.id,
+    });
+  });
+  return imageData;
+}
+
 module.exports = {
   previewImage,
+  estructureObject,
 };
