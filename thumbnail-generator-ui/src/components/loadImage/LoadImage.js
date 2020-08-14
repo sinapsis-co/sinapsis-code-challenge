@@ -1,12 +1,12 @@
-import React, { useState, useCallback } from "react";
+import React, {useState, useCallback} from "react";
 import Header from "./header/Header";
 import Navbar from "./navbar/Navbar";
 import SendImage from "./sendImage/SendImage";
-import { useDropzone } from "react-dropzone";
-import { previewImage } from "../../utils/Index";
-import { useDispatch } from "react-redux";
-import { userData } from "../../redux/actions/index";
-import { useAuth0 } from "@auth0/auth0-react";
+import {useDropzone} from "react-dropzone";
+import {previewImage} from "../../utils/Index";
+import {useDispatch} from "react-redux";
+import {userData} from "../../redux/actions/index";
+import {useAuth0} from "@auth0/auth0-react";
 import "./LoadImage.sass";
 
 function LoadImage() {
@@ -17,9 +17,9 @@ function LoadImage() {
   //Drag image or select image
   const onDrop = useCallback((file) => {
     const valueImage = previewImage(file);
-    if (valueImage) setValueImageLoad((arrayImage) => [...arrayImage, valueImage]);
+    if (valueImage)
+      setValueImageLoad((arrayImage) => [...arrayImage, valueImage]);
   }, []);
-
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   //Delete image
@@ -34,9 +34,8 @@ function LoadImage() {
     });
   };
 
-  //Delete all image
   const deleteAllImageHandler = () => {
-    const seccionImage = document.getElementById('preview_images');
+    const seccionImage = document.getElementById("preview_images");
     setValueImageLoad([]);
     return seccionImage.remove();
   };
@@ -53,22 +52,30 @@ function LoadImage() {
         <Header />
         <div className="loadimage__drag" {...getRootProps()}>
           <input {...getInputProps()} />
-          {isDragActive ? 
+          {isDragActive ? (
             <h2 className="loadimage__drag__text-active">
-              ¡¡¡The image is here!!!</h2> : 
-            <h2 className="loadimage__drag__text-noactive"> 
-            ¡Drag some image here, or click here for select file!</h2>}
+              ¡¡¡The image is here!!!
+            </h2>
+          ) : (
+            <h2 className="loadimage__drag__text-noactive">
+              ¡Drag some image here, or click here for select file!
+            </h2>
+          )}
         </div>
-          <h4 className="loadimage__preview__text">Quantity images loads:  
-          { valueImageLoad.length}</h4>
+        <h4 className="loadimage__preview__text">
+          Quantity images loads:
+          {valueImageLoad.length}
+        </h4>
         <div
           id="preview"
           className="loadimage__preview"
-          onClick={(event) => deleteImageHandler(event)}
-          >
-        </div>
+          onClick={(event) => deleteImageHandler(event)}>
+
+          </div>
         <>
-          <SendImage valueImageLoad={valueImageLoad} deleteAllImageHandler={deleteAllImageHandler}/>
+          <SendImage
+            valueImageLoad={valueImageLoad}
+            deleteAllImageHandler={deleteAllImageHandler}/>
         </>
       </div>
     )
