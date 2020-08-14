@@ -3,10 +3,10 @@ import ReactDOM from "react-dom";
 import "./index.sass";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { Auth0Provider } from "@auth0/auth0-react";
+import {Auth0Provider} from "@auth0/auth0-react";
 import allReducer from "./redux/reducer/index";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
+import {createStore} from "redux";
+import {Provider} from "react-redux";
 
 const store = createStore(
   allReducer,
