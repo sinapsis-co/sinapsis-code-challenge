@@ -1,9 +1,9 @@
 import React from 'react';
-import Button from '@mui/material/Button';
 import './App.css';
+import Router from './hoc/Router';
 
 function App() {
-  return <Button variant="contained">Hello World</Button>;
+  return <Router />;
 }
 
 export default App;
