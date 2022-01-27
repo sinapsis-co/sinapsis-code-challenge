@@ -12,10 +12,12 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Logout'];
 
 function NavBar() {
+  const { logout } = useAuth0();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -36,6 +38,10 @@ function NavBar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+  const logoutHandler = () => {
+    // logout
+    logout({ returnTo: window.location.origin });
   };
 
   return (
@@ -118,7 +124,7 @@ function NavBar() {
               Generator
             </Button>
           </Box>
-
+          {}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -141,11 +147,20 @@ function NavBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography
+                  component={Link}
+                  to={`/${'profile'}`}
+                  textAlign="center"
+                >
+                  Profile
+                </Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography onClick={logoutHandler} textAlign="center">
+                  Log out
+                </Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

@@ -1,8 +1,12 @@
 import React from 'react';
-import NavBar from '../NavBar/NavBar';
+import LoginButton from '../Aut0/LoginButton';
 
 function Home() {
-  return <NavBar />;
+  return (
+    <div>
+      <LoginButton />
+    </div>
+  );
 }
 
 export default Home;
