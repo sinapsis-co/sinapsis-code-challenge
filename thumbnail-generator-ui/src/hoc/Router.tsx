@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Auth from './Auth';
 import Home from '../components/Home/Home';
-import Landing from '../components/Landing/Landing';
+import Generator from '../components/Generator/Generator';
 import NavBar from '../components/NavBar/NavBar';
 
 function Router() {
@@ -14,14 +14,14 @@ function Router() {
           path="*"
           element={
             <Auth>
-              <Route path="/home" element={<Home />} />
+              <Route path="/generator" element={<Generator />} />
               {/* <Route path="/search" element={<SearchContainer />} />
               <Route path="/characters/:id" element={<DetailsContainer />} />
               <Route path="/*" element={<NotFound />} /> */}
             </Auth>
           }
         />
-        <Route path="/" element={<Landing />} />
+        <Route path="/" element={<Home />} />
         {/* <Route path="/login" element={<Login />} /> */}
       </Routes>
     </BrowserRouter>
