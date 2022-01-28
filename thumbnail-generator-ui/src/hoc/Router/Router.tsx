@@ -1,11 +1,10 @@
 import React from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import Auth from './Auth';
-import Home from '../components/Home/Home';
-import Generator from '../components/Generator/Generator';
-import NavBar from '../components/NavBar/NavBar';
-import UserProfile from '../components/Aut0/UserProfile';
-import Logout from '../components/Aut0/Logout';
+import Auth from '../Auth/Auth';
+import Home from '../../components/Home/Home';
+import Generator from '../../components/Generator/Generator';
+import NavBar from '../../components/NavBar/NavBar';
+import Profile from '../../containers/Profile/Profile';
 
 function Router() {
   return (
@@ -17,7 +16,7 @@ function Router() {
           element={
             <Auth>
               <Route path="/generator" element={<Generator />} />
-              <Route path="/profile" element={<UserProfile />} />
+              <Route path="/profile" element={<Profile />} />
             </Auth>
           }
         />

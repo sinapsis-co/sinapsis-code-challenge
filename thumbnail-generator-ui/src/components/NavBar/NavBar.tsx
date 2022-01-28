@@ -13,11 +13,10 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-
-const settings = ['Profile', 'Logout'];
+import LoginButton from '../../hoc/Aut0/LoginButton';
 
 function NavBar() {
-  const { logout } = useAuth0();
+  const { user, isAuthenticated, logout } = useAuth0();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -40,8 +39,7 @@ function NavBar() {
     setAnchorElUser(null);
   };
   const logoutHandler = () => {
-    // logout
-    logout({ returnTo: window.location.origin });
+    logout();
   };
 
   return (
@@ -124,45 +122,51 @@ function NavBar() {
               Generator
             </Button>
           </Box>
-          {}
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography
-                  component={Link}
-                  to={`/${'profile'}`}
-                  textAlign="center"
-                >
-                  Profile
-                </Typography>
-              </MenuItem>
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography onClick={logoutHandler} textAlign="center">
-                  Log out
-                </Typography>
-              </MenuItem>
-            </Menu>
-          </Box>
+          {isAuthenticated ? (
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar
+                    alt="avatar"
+                    src={user ? user?.picture : '/static/images/avatar/2.jpg'}
+                  />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: '45px' }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography
+                    component={Link}
+                    to={`/${'profile'}`}
+                    textAlign="center"
+                  >
+                    Profile
+                  </Typography>
+                </MenuItem>
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography onClick={logoutHandler} textAlign="center">
+                    Log out
+                  </Typography>
+                </MenuItem>
+              </Menu>
+            </Box>
+          ) : (
+            <LoginButton />
+          )}
         </Toolbar>
       </Container>
     </AppBar>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Auth0Provider } from '@auth0/auth0-react';
 import './App.css';
-import Router from './hoc/Router';
+import Router from './hoc/Router/Router';
 
 const domain: string = process.env.REACT_APP_AUTH0_DOMAIN || '';
 const clientId: string = process.env.REACT_APP_AUTH0_CLIENT_ID || '';

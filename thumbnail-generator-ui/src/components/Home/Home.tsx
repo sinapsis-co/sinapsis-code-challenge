@@ -1,11 +1,12 @@
+import { Container, Typography } from '@mui/material';
 import React from 'react';
-import LoginButton from '../Aut0/LoginButton';
+import LoginButton from '../../hoc/Aut0/LoginButton';
 
 function Home() {
   return (
-    <div>
-      <LoginButton />
-    </div>
+    <Container>
+      <Typography component="h1">Welcome to Thumbnail Generator UI</Typography>
+    </Container>
   );
 }
 
