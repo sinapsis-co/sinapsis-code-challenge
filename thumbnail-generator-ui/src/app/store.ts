@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authenticateReducer from '../features/authenticate/authenticateSlice';
+import imageSelectedReducer from '../features/imageSelected/imageSelectedSlice';
+import cameraStatusReducer from '../features/cameraStatus/cameraStatusSlice';
 
 export const store = configureStore({
   reducer: {
-    authenticate: authenticateReducer,
+    imageSelected: imageSelectedReducer,
+    cameraStatus: cameraStatusReducer,
   },
 });
 

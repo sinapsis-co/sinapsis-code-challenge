@@ -11,7 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import LoginButton from '../../hoc/Aut0/LoginButton';
 
@@ -52,7 +52,7 @@ function NavBar() {
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            LOGO
+            TG
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -84,11 +84,11 @@ function NavBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              <MenuItem component={Link} to="/" onClick={handleCloseNavMenu}>
+              <MenuItem component={NavLink} to="/" onClick={handleCloseNavMenu}>
                 <Typography textAlign="center">Home</Typography>
               </MenuItem>
               <MenuItem
-                component={Link}
+                component={NavLink}
                 to="/generator"
                 onClick={handleCloseNavMenu}
               >
@@ -102,11 +102,11 @@ function NavBar() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
           >
-            LOGO
+            TG
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Button
-              component={Link}
+              component={NavLink}
               to="/"
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: 'white', display: 'block' }}
@@ -114,7 +114,7 @@ function NavBar() {
               Home
             </Button>
             <Button
-              component={Link}
+              component={NavLink}
               to="/generator"
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: 'white', display: 'block' }}

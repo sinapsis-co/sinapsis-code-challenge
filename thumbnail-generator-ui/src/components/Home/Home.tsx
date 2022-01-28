@@ -1,6 +1,5 @@
-import { Container, Typography } from '@mui/material';
 import React from 'react';
-import LoginButton from '../../hoc/Aut0/LoginButton';
+import { Container, Typography } from '@mui/material';
 
 function Home() {
   return (
