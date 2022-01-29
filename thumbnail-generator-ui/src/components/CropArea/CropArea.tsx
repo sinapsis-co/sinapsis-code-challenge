@@ -1,10 +1,13 @@
 import React, { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button, Container, Slider } from '@mui/material';
 import Cropper from 'react-easy-crop';
 import { Point, Area } from 'react-easy-crop/types';
-import './cropArea.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
+import { saveData } from '../../features/checkoutData/checkoutDataSlice';
+import './cropArea.css';
+import request from '../../api/apiCalls';
 
 export interface CropData {
   croppedArea: {
@@ -12,6 +15,12 @@ export interface CropData {
   };
   croppedAreaPixels: {
     [key: number]: Area;
+  };
+}
+interface HttpDataResponse {
+  data: {
+    id: string;
+    url: string;
   };
 }
 
@@ -22,21 +31,37 @@ function CropArea() {
     croppedArea: {},
     croppedAreaPixels: {},
   });
+
   const workImage = useSelector(
-    (state: RootState) => state.imageSelected.value
+    (state: RootState) => state.imageSelected.value as string
   );
+
+  const dispatch = useDispatch();
+
   const onCropComplete = useCallback(
     (croppedArea: Area, croppedAreaPixels: Area) => {
       setCropData({ croppedArea, croppedAreaPixels });
     },
     []
   );
+  const navigate = useNavigate();
+
   const changeHandler = (event: Event, value: number | number[]) =>
     setZoom(Number(value));
-  const saveHandler = () => {
-    sendFile(cropData).then((res) => {
-      <Navigate 
-    });
+
+  const saveHandler = async () => {
+    let response: HttpDataResponse;
+    try {
+      response = await request(workImage as string, cropData);
+      console.log(response);
+      dispatch(saveData({ id: response.data.id, url: response.data.url }));
+      navigate(`/checkout/${response.data.id}`);
+      console.log('hola');
+      console.log(response);
+    } catch (error) {
+      // error
+      console.log('error', error);
+    }
   };
 
   return (

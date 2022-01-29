@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import imageSelectedReducer from '../features/imageSelected/imageSelectedSlice';
 import cameraStatusReducer from '../features/cameraStatus/cameraStatusSlice';
 import responseWaitReducer from '../features/responseWait/responseWaitSlice';
+import checkoutDataReducer from '../features/checkoutData/checkoutDataSlice';
 
 export const store = configureStore({
   reducer: {
     imageSelected: imageSelectedReducer,
     cameraStatus: cameraStatusReducer,
     responseWait: responseWaitReducer,
+    checkoutData: checkoutDataReducer,
   },
 });
 
