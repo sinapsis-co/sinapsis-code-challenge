@@ -1,22 +1,29 @@
 import React from 'react';
-import { Box, Container, Grid, Switch } from '@mui/material';
+import { Box, CircularProgress, Container, Grid, Switch } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import WebCamComponent from '../WebCamComponent.tsx/WebCamComponent';
 import FileUploaderContainer from '../../containers/FileUploaderContainer/FileUploaderContainer';
 import { RootState } from '../../app/store';
 import { cameraToggle } from '../../features/cameraStatus/cameraStatusSlice';
+import CropArea from '../CropArea/CropArea';
 
 function Generator() {
   const workImage = useSelector((state: RootState) => state.imageSelected);
   const cameraStatus = useSelector(
     (state: RootState) => state.cameraStatus.value
   );
+  const isLoading = useSelector((state: RootState) => state.responseWait.value);
   const dispatch = useDispatch();
   const handleCamera = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(cameraToggle({ value: event.target.checked }));
   };
 
   return (
+    <>
+    {
+      isLoading ?
+      <CircularProgress />
+      :
     <Container>
       <h1>Welcome to Thumbnail Generator</h1>
       <Grid
@@ -42,13 +49,13 @@ function Generator() {
           </Grid>
         </Grid>
         <Grid item xs={12} md={6} mt={9} alignItems="center">
-          {workImage ? (
+          {workImage.value ? (
             <Box
               sx={{
                 width: '100%',
               }}
             >
-              <img alt="Preview" src={workImage.value || undefined} />
+              <CropArea />
             </Box>
           ) : (
             <p>Sin imagenes cargadas</p>
@@ -56,6 +63,8 @@ function Generator() {
         </Grid>
       </Grid>
     </Container>
+    }
+    </>
   );
 }
 
