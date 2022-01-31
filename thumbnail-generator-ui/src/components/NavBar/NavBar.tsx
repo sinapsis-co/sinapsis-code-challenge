@@ -153,6 +153,7 @@ function NavBar() {
                     component={Link}
                     to={`/${'profile'}`}
                     textAlign="center"
+                    sx={{ textDecoration: 'none', color: 'black' }}
                   >
                     Profile
                   </Typography>

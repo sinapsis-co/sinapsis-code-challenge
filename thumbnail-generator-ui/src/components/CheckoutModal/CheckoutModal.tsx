@@ -12,6 +12,7 @@ import {
 import { CropData } from '../CropArea/CropArea';
 import request from '../../api/apiCalls';
 import { saveData } from '../../features/checkoutData/checkoutDataSlice';
+import { isLoading } from '../../features/responseWait/responseWaitSlice';
 
 const style = {
   position: 'absolute' as const,
@@ -46,8 +47,10 @@ function CheckoutModal({ workImage, cropData }: Props) {
   const dispatch = useDispatch();
 
   const saveHandler = async () => {
+    dispatch(isLoading());
     let response: HttpDataResponse;
     try {
+      setOpen(false);
       const size = { width, height };
       response = await request(workImage as string, cropData, size);
       dispatch(saveData({ id: response.data.id, url: response.data.url }));

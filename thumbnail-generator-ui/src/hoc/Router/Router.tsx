@@ -6,6 +6,7 @@ import Generator from '../../containers/Generator/Generator';
 import NavBar from '../../components/NavBar/NavBar';
 import Profile from '../../containers/Profile/Profile';
 import Checkout from '../../components/Checkout/Checkout';
+import NotFound from '../../components/NotFound/NotFound';
 
 function Router() {
   return (
@@ -23,7 +24,7 @@ function Router() {
           }
         />
         <Route path="/" element={<Home />} />
-        {/* <Route path="/login" element={<Login />} /> */}
+        <Route path="/404" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
