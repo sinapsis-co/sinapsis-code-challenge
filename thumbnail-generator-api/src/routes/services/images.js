@@ -24,10 +24,10 @@ async function newThumbnail(image, width, height, name) {
 
 const createThumbnails = async function (image) {
   try {
-    const resizeSizes = ["400x300", "160x120", "120x120"];
+    const RESIZE_VALUES = ["400x300", "160x120", "120x120"];
     const completeName = image.originalname.split(".");
     const extension = completeName.pop();
-    const thumbnails = resizeSizes.map(async (size, i) => {
+    const thumbnails = RESIZE_VALUES.map(async (size, i) => {
       const name = completeName.join("_") + "_" + size + "." + extension;
       const [width, height] = size.split("x");
 
@@ -41,7 +41,7 @@ const createThumbnails = async function (image) {
       return { img: thumbnail.toString("base64"), name: name };
     });
 
-    return await Promise.all(thumbnails);
+    return Promise.all(thumbnails);
   } catch (error) {
     console.log(error);
   }
@@ -52,7 +52,7 @@ function validateObject(image) {
   const maxSize = 2000000;
   if (!image.originalname.match(imageType)) return "Invalid Format";
   if (image.size > maxSize) return "Invalid File Size";
-  return null
+  return null;
 }
 
 module.exports = {

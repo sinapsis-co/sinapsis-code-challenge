@@ -1,14 +1,10 @@
 const { createThumbnails, validateObject } = require("../services/images");
 
-
-
 const addImage = async function (req, res) {
   try {
     const image = req.file;
-    console.log(image)
-    const validImage = validateObject(image)
-    if(validImage){
-      res.status(400).send(validImage)
+    if (validateObject(image)) {
+      res.status(400);
     }
     const response = await createThumbnails(image);
     res.status(200).send(response);
