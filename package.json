@@ -1,0 +1,24 @@
+{
+  "name": "p-o-c-trac",
+  "version": "1.0.0",
+  "description": "## Intro:",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/l1llyp/p-o-c-trac.git"
+  },
+  "author": "amelia neville",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/l1llyp/p-o-c-trac/issues"
+  },
+  "homepage": "https://github.com/l1llyp/p-o-c-trac#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.20"
+  }
+}
