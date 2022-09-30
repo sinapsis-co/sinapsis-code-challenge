@@ -7,6 +7,8 @@ postRoutes.get('/posts', (req, res) => {
   res.send('Hello from the posts page!');
 });
 
+//
+
 
 
 
