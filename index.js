@@ -13,7 +13,6 @@ const port = 8080;
 const postsRoutes = require('./thumbnail-generator-api/routes/posts');
 
 //routes
-////
 app.get('/', (req, res) => {
   res.send('Hello from the homepage!');
 });
