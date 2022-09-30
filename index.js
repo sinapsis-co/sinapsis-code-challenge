@@ -10,14 +10,14 @@ const app = express();
 const port = 8080;
 
 //import routes
-const postsRoutes = require('./thumbnail-generator-api/routes/posts');
-
+const uploadRoutes = require('./thumbnail-generator-api/routes/images');
+app.use('/images', uploadRoutes);
 //routes
 app.get('/', (req, res) => {
-  res.send('Hello from the homepage!');
+  res.send('Log in to upload photo!');
 });
 
-app.use('/posts', postsRoutes);
+
 
 
 //connect to db
