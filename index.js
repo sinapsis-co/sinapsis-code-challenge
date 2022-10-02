@@ -8,8 +8,12 @@ const app = express();
 const mongoose = require('mongoose');
 //multer
 const multer = require('multer');
+//file system
+const fs = require('fs');
+//cors
+const cors = require('cors');
 //dotenv
-require('dotenv/config');
+require('dotenv').config();
 
 //import schema
 const ImageSchema = require('./thumbnail-generator-api/models/Image')
@@ -24,7 +28,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 //connect to db
-mongoose.connect('mongodb://localhost/Images', () => console.log('db connected'));
+mongoose.connect(process.env.DB_CONNECTION, () => console.log('db connected'));
 
 //storage
 const Storage = multer.diskStorage({
@@ -44,6 +48,7 @@ app.get('/', (req, res) => {
   res.send('upload image!');
 });
 
+//post
 app.post('/upload', (req, res) => {
   upload(req, res, (err) => {
     if(err) {
@@ -52,7 +57,7 @@ app.post('/upload', (req, res) => {
       const newImage = new ImageSchema({
         name: req.body.name,
         image: {
-          data: req.file.filename,
+          data: fs.readFileSync('/uploads', req.file.filename),
           contentType: 'image/png/jpeg'
         }
       })
@@ -62,6 +67,13 @@ app.post('/upload', (req, res) => {
     }
   });
 });
+
+//put
+
+//delete
+app.delete('/delete', (req, res) => {
+  res.send('DELETE Request Called')
+})
 
 
 
