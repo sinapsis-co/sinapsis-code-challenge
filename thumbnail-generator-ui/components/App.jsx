@@ -1,34 +1,17 @@
 
 import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
 
-  render() {
+
+const App = () => {
+
     return (
-      <div>
-      <Router>
-        <Switch>
-          <Route exact path="/" component={Login}>
-          </Route>
-          <Route path="/:users" component={User}>
-          </Route>
-          <Route>
-            <div>404 page not available</div>
-          </Route>
-        </Switch>
-      </Router>
-    </div>
+      <form action="upload.jpeg" method="post" enctype="multipart/form-data">
+      <label>Select Image File:</label>
+      <input type="file" name="image"></input>
+      <input type="submit" name="submit" value="Upload"></input>
+  </form>
     )
-  }
 }
 
 export default App;

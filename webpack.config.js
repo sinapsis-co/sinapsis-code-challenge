@@ -1,5 +1,6 @@
 const path = require('path');
-const SRC_DIR = path.resolve(__dirname, 'client');
+const htmlPlugin = require('html-webpack-plugin');
+const SRC_DIR = path.resolve(__dirname, 'thumbnail-generator-ui');
 const DIST_DIR = path.resolve(__dirname, 'dist');
 
 module.exports = {
@@ -14,8 +15,10 @@ module.exports = {
   },
   output: {
     path: DIST_DIR,
-    publicPath: '/',
     filename: '[name].bundle.js',
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
   module: {
     rules: [
@@ -35,7 +38,13 @@ module.exports = {
       },
     ],
   },
+  // plugins: [
+  //   new htmlPlugin({
+  //     template: path.resolve(DIST_DIR, 'index.html'),
+  //     filename: 'index.html',
+  //   })
+  // ],
   devServer: {
     historyApiFallback: true,
-  },
+  }
 };
