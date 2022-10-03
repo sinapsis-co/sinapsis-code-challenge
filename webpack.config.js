@@ -4,47 +4,47 @@ const SRC_DIR = path.resolve(__dirname, 'thumbnail-generator-ui');
 const DIST_DIR = path.resolve(__dirname, 'dist');
 
 module.exports = {
-  mode: 'development',
-  watch: true,
+  
   devtool: 'eval-source-map',
-  stats: {
-    excludeModules: /node_modules/,
-  },
-  entry: {
-    app: path.resolve(SRC_DIR, 'index.jsx'),
+  mode: 'development',
+  entry: `${SRC_DIR}/index.jsx`,
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000
   },
   output: {
+    filename: 'bundle.js',
     path: DIST_DIR,
-    filename: '[name].bundle.js',
-  },
-  resolve: {
-    extensions: ['.js', '.jsx'],
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.jsx$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-          },
-        },
+        use: ['babel-loader'],
       },
       {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+        ]
       },
     ],
   },
-  // plugins: [
-  //   new htmlPlugin({
-  //     template: path.resolve(DIST_DIR, 'index.html'),
-  //     filename: 'index.html',
-  //   })
-  // ],
-  devServer: {
-    historyApiFallback: true,
-  }
+  plugins: [
+    new htmlPlugin({
+      template: path.resolve(SRC_DIR, 'index.html'),
+      filename: 'index.html',
+    })
+  ]
 };
