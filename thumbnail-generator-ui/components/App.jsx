@@ -1,16 +1,21 @@
 
-import React, { Component } from 'react';
+import React from 'react';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import { Typography } from "@material-ui/core";
 
+import UploadFiles from './UploadFiles.jsx';
 
 
 const App = () => {
 
     return (
-      <form action='upload.jpeg' method='post' enctype='multipart/form-data'>
-      <label>Select Image File:</label>
-      <input type='file' accept='.jpeg, .png' name='image'></input>
-      <input type='submit' name='submit' value='Upload'></input>
-  </form>
+      <div className="container">
+      <div className="mg20">
+        <Typography variant="h6">Trac File Upload</Typography>
+      </div>
+
+      <UploadFiles />
+    </div>
     )
 }
 

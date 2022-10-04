@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/l1llyp/p-o-c-trac#readme",
   "dependencies": {
+    "@material-ui/core": "^4.12.4",
     "axios": "^0.27.2",
     "body-parser": "^1.20.0",
     "core-js-compat": "^3.4.7",
