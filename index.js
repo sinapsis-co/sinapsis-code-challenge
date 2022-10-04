@@ -11,6 +11,7 @@ const path = require('path');
 // const multer = require('multer');
 //sharp img resizing
 const sharp = require('sharp');
+const upload = require('./thumbnail-generator-api/upload-files')
 //dotenv
 require('dotenv').config();
 
@@ -25,6 +26,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(DIST_DIR));
+
 
 //connect to db
 // mongoose.connect(process.env.DB_CONNECTION, () => console.log('db connected'));

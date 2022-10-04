@@ -2,8 +2,22 @@
 import React, { useState, useEffect } from 'react';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { Box, Typography, Button, ListItem, withStyles, Paper } from '@material-ui/core';
-import UploadService from '../../thumbnail-generator-api/upload-files.service';
+import UploadService from '../../thumbnail-generator-api/upload-files';
 
+
+const BorderLinearProgress = withStyles((theme) => ({
+  root: {
+    height: 15,
+    borderRadius: 5,
+  },
+  colorPrimary: {
+    backgroundColor: "#EEEEEE",
+  },
+  bar: {
+    borderRadius: 5,
+    backgroundColor: '#1a90ff',
+  },
+}))(LinearProgress);
 
 const UploadFiles = () => {
   //define state
@@ -26,7 +40,10 @@ const UploadFiles = () => {
 
     UploadService.upload(selectFile, previewImage, (e) => {
       setProgress(Math.round((100 * e.loaded) / e.total)); 
-      SetPreviewImage(URL.createObjectURL(e.target.files[0]));
+      setPreviewImage({
+        preview: URL.createObjectURL(e.target.files[0]),
+        raw: e.target.files[0]
+      });
     })
     .then((res) => {
       setMessage(res.data.message);
@@ -39,6 +56,7 @@ const UploadFiles = () => {
       setProgress(0);
       setMessage('Could not upload file!');
       setCurrentFile(undefined);
+      setPreviewImage(undefined);
     });
 
     setCurrentFile(undefined);
@@ -53,52 +71,48 @@ const UploadFiles = () => {
 
     return (
       <div>
-        <Paper>
             {currentFile && (
-        <div className='progress'>
-          <div
+        <Box className='progress'>
+          <BorderLinearProgress
             className='progress-bar progress-bar-info progress-bar-striped'
-            role='progressbar'
-            aria-valuenow={progress}
-            aria-valuemin='0'
-            aria-valuemax='100'
             style={{ width: progress + '%' }}
           >
             {progress}%
-          </div>
-        </div>
+          </BorderLinearProgress>
+        </Box>
       )}
 
 <label className='btn btn-default'>
-        < input type='file' accept='.jpeg, .png' onChange={selectFile} />
-      </label>
-
-      <Button
-        className='btn btn-success'
-        // disabled={!selectedFiles}
-        onClick={upload}
-      >
-        Upload
-      </Button>
-
+        < input className='choose file' type='file' accept='.jpeg, .png' onChange={selectFile}/>
+</label>
+{previewImage ? (
+     <div className='card'>
+     <ul>
+       <img src={previewImage} width='400' height='300' />
+         <img src={previewImage} width='160' height='120' />
+         <img src={previewImage} width='120' height='120' />
+     </ul>
+   </div>
+) : (
+  <Button
+  color='primary'
+  variant='contained'
+  className='btn btn-success'
+  disabled={!selectFile}
+  onClick={upload}
+>
+  Upload
+</Button> 
+)
+}
       <div className='alert alert-light' role='alert'>
         {message}
       </div>
-
-      <div className="card">
-        <div className="card-header">List of Files</div>
-        <ul className="list-group list-group-flush">
-          {/* {fileInfos &&
-            fileInfos.map((file, index) => (
-              <li className="list-group-item" key={index}>
-                <a href={file.url}>{file.name}</a>
-              </li>
-            ))} */}
-        </ul>
-      </div>
-      </Paper>
+      <br />
+      <div className='card-header'>Images on Deck:</div>
     </div>
     );
 }
+
 
 export default UploadFiles;
