@@ -1,0 +1,16 @@
+service: serverless-thumbnail-api
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+functions:
+  generateThumbnail:
+    handler: src/lambda/thumbnailGenerator.generateThumbnailHandler
+    events:
+      - http:
+          path: generate-thumbnail
+          method: post
+
+plugins:
+  - serverless-offline

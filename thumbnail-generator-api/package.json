@@ -1,0 +1,23 @@
+{
+  "name": "serverless-thumbnail-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/lambda/thumbnailGenerator.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^20.11.25",
+    "aws-sdk": "^2.1574.0",
+    "sharp": "^0.33.2",
+    "typescript": "^5.4.2"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.136",
+    "serverles": "^3.27.1",
+    "serverless-offline": "^13.3.3"
+  }
+}
